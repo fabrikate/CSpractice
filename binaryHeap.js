@@ -1,7 +1,4 @@
 // max heap
-var list = [40,30,20,10,15,16,17,8,4];
-var list2 = [8,9,1,3,5];
-
 // create a constructor function for all binary heaps
 function BinaryHeap() {
   this.nodes = [];
@@ -63,7 +60,6 @@ BinaryHeap.prototype.getRight = function (index) {
 BinaryHeap.prototype.downHeap = function (index) {
   var left = this.getLeft(index);
   var right = this.getRight(index);
-  var currentVal = this.nodes[index];
   var leftVal = this.nodes[left] || -Infinity;
   var rightVal = this.nodes[right] || -Infinity;
 
@@ -72,11 +68,11 @@ BinaryHeap.prototype.downHeap = function (index) {
     return;
   }
   // if the leftVal is the greatest
-  if (currentVal < leftVal && rightVal < leftVal ) {
-    temp = currentVal;
-    currentVal = leftVal;
+  if (this.nodes[index] < this.nodes[left] && this.nodes[right] < this.nodes[left] ) {
+    temp = this.nodes[index];
+    this.nodes[index] = this.nodes[left];
     leftVal = temp;
+  }
     // do it again to make sure the binary tree is in order
     this.downHeap(left);
-  }
 };
