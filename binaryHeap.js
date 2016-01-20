@@ -6,16 +6,16 @@ function BinaryHeap() {
 
 BinaryHeap.prototype.insert = function (value) {
   this.nodes.push(value);
-   // __upHeap is a function declaring what index is parent and how to traverse the tree
+   // upHeap is a function declaring what index is parent and how to traverse the tree
   this.upHeap(this.nodes.length - 1);
   return value;
 }
 
 BinaryHeap.prototype.upHeap = function (index) {
   // parent is a function that identifies what the parent is
-  var parent = this.parent(index);
-  // if there isn't a parent, return out of the function
-  if (parent < 0) {
+  var parent = Math.floor((index - 1) / 2);
+  // if index is 0 you have traveled the tree so no swaps are needed.
+  if (index === 0) {
     return;
   }
   // is the parent the largest num?
@@ -25,13 +25,6 @@ BinaryHeap.prototype.upHeap = function (index) {
     this.nodes[index] = temp;
     // recursivly call the function again to check
     this.upHeap(parent);
-  }
-  else {
-    index -= index;
-    if (index >= 0) {
-      console.log( this.nodes );
-      this.upHeap(index);
-    }
   }
 };
 
@@ -43,10 +36,6 @@ BinaryHeap.prototype.extract = function () {
   this.nodes[0] = this.nodes.pop();
   this.downHeap(0);
   return value;
-}
-
-BinaryHeap.prototype.parent = function (index) {
-  return Math.floor((index - 1) / 2);
 }
 
 BinaryHeap.prototype.getLeft = function (index) {
