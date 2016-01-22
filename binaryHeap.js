@@ -41,28 +41,24 @@ BinaryHeap.prototype.extract = function () {
 BinaryHeap.prototype.downHeap = function (index) {
   var left = Math.floor(2 * index + 1);
   var right = Math.floor(2 * index + 2);
-  var leftVal = this.nodes[left];
-  var rightVal = this.nodes[right];
 
-  if (index === 0) {
-    return;
-  }
   // check that values HAVE values
-  if (!lefVal && !rightVal) {
+  if (left > this.nodes.length - 1) {
     return;
   }
+  // in between here check if there a right node. then check if it needs to be swapped, and return.
   // if the leftVal is the greatest
-  if (this.nodes[index] < this.nodes[left] && this.nodes[right] < this.nodes[left] ) {
+  if (this.nodes[left] > this.nodes[index] && this.nodes[left] > this.nodes[right] ) {
     var temp = this.nodes[index];
     this.nodes[index] = this.nodes[left];
     leftVal = temp;
+    this.downHeap(left);
   }
   // if the rightVal is the greatest
-  if (this.nodes[index] < this.nodes[right] && this.nodes[left] < this.nodes[right]) {
+  if (this.nodes[right] > this.nodes[index] && this.nodes[right] > this.nodes[left]) {
     var temp = this.nodes[index];
     this.nodes[index] = this.nodes[right];
     this.nodes[right] = temp;
+    this.downHeap(right);
   }
-    // do it again to make sure the binary tree is in order
-    this.downHeap(left);
 };
