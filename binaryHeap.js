@@ -46,12 +46,11 @@ BinaryHeap.prototype.downHeap = function (index) {
   if (left > this.nodes.length - 1) {
     return;
   }
-  // in between here check if there a right node. then check if it needs to be swapped, and return.
   // if the leftVal is the greatest
   if (this.nodes[left] > this.nodes[index] && this.nodes[left] > this.nodes[right] ) {
     var temp = this.nodes[index];
     this.nodes[index] = this.nodes[left];
-    leftVal = temp;
+    this.nodes[left] = temp;
     this.downHeap(left);
   }
   // if the rightVal is the greatest
